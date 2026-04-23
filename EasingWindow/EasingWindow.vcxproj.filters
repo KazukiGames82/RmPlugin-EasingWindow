@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Version">
+      <UniqueIdentifier>{0d6d54a0-90c3-464f-bb9f-1c4a64d6689b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasingWindow">
+      <UniqueIdentifier>{f7e5c91a-a27d-4dd0-811a-fd3cde6f5a07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{0133601a-f6f7-4f1c-852d-e57dd609fb87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\Platform">
+      <UniqueIdentifier>{362d0a54-cd3b-4aaa-8f32-b4b3e8cb04c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\Core">
+      <UniqueIdentifier>{19c001ba-e0cf-4810-bc01-1b98a3c7fbdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependecies">
+      <UniqueIdentifier>{0e3a430a-e2f9-4294-875e-362b18fec575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependecies\Motion">
+      <UniqueIdentifier>{d6d25fa7-adfc-47c3-884b-5336425c334e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependecies\Easing">
+      <UniqueIdentifier>{1441108d-0f18-4749-9493-ec10a4cbbdbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependecies\Direction">
+      <UniqueIdentifier>{2a3bd627-67f9-423e-8b46-eb11f3976fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependecies\Config">
+      <UniqueIdentifier>{a301feb7-0145-4255-bebb-2af61034e267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependecies\Animator">
+      <UniqueIdentifier>{c01f5e9a-c715-434d-9d6b-01c84bc13051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependecies\CommandHandler">
+      <UniqueIdentifier>{3c6c1ff8-e2bf-4e18-847e-8738bbcf3384}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Version.h">
+      <Filter>Version</Filter>
+    </ClInclude>
+    <ClInclude Include="EasingWindow.h">
+      <Filter>EasingWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Dependecies\Direction</Filter>
+    </ClInclude>
+    <ClInclude Include="Motion.h">
+      <Filter>Dependecies\Motion</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Dependecies\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandler.h">
+      <Filter>Dependecies\CommandHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>Dependecies\Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Helpers\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtil.h">
+      <Filter>Helpers\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowWin.h">
+      <Filter>Helpers\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="FileWin.h">
+      <Filter>Helpers\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Helpers\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Dependecies\Animator</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EasingWindow.rc">
+      <Filter>Version</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EasingWindow.cpp">
+      <Filter>EasingWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>Dependecies\Easing</Filter>
+    </ClCompile>
+    <ClCompile Include="Direction.cpp">
+      <Filter>Dependecies\Direction</Filter>
+    </ClCompile>
+    <ClCompile Include="Motion.cpp">
+      <Filter>Dependecies\Motion</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandler.cpp">
+      <Filter>Dependecies\CommandHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Helpers\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="FileWin.cpp">
+      <Filter>Helpers\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowWin.cpp">
+      <Filter>Helpers\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Dependecies\Animator</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
