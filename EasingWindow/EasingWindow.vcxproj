@@ -19,32 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animator.h" />
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="Direction.h" />
-    <ClInclude Include="Easing.h" />
+    <ClInclude Include="Dependecies\Animator.h" />
+    <ClInclude Include="Dependecies\Command.h" />
+    <ClInclude Include="Dependecies\CommandHandler.h" />
+    <ClInclude Include="Dependecies\Config.h" />
+    <ClInclude Include="Dependecies\Direction.h" />
+    <ClInclude Include="Dependecies\Easing.h" />
+    <ClInclude Include="Dependecies\Motion.h" />
     <ClInclude Include="EasingWindow.h" />
-    <ClInclude Include="FileWin.h" />
-    <ClInclude Include="Math.h" />
-    <ClInclude Include="Motion.h" />
-    <ClInclude Include="ParseEnum.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="StringUtil.h" />
+    <ClInclude Include="Util\Entry.h" />
+    <ClInclude Include="Util\FileWin.h" />
+    <ClInclude Include="Util\Math.h" />
+    <ClInclude Include="Util\Point.h" />
+    <ClInclude Include="Util\String.h" />
+    <ClInclude Include="Util\WindowWin.h" />
     <ClInclude Include="Version.h" />
-    <ClInclude Include="WindowWin.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EasingWindow.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animator.cpp" />
-    <ClCompile Include="Easing.cpp" />
+    <ClCompile Include="Dependecies\Animator.cpp" />
+    <ClCompile Include="Dependecies\Easing.cpp" />
+    <ClCompile Include="Dependecies\Motion.cpp" />
     <ClCompile Include="EasingWindow.cpp" />
-    <ClCompile Include="FileWin.cpp" />
-    <ClCompile Include="Math.cpp" />
-    <ClCompile Include="Motion.cpp" />
-    <ClCompile Include="WindowWin.cpp" />
+    <ClCompile Include="Util\FileWin.cpp" />
+    <ClCompile Include="Util\Math.cpp" />
+    <ClCompile Include="Util\WindowWin.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{64FDEE97-6B7E-40E5-A489-ECA322825BC8}</ProjectGuid>

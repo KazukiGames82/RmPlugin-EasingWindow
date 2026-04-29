@@ -1,14 +1,15 @@
+#include "EasingWindow.h"
+
 #include <cmath>
 #include <cwctype>
 #include <chrono>
 
-#include "Math.h"
-#include "StringUtil.h"
-#include "FileWin.h"
-#include "WindowWin.h"
-#include "ParseEnum.h"
-#include "Animator.h"
-#include "EasingWindow.h"
+#include "Util/Math.h"
+#include "Util/String.h"
+#include "Util/FileWin.h"
+#include "Util/WindowWin.h"
+#include "Util/Entry.h"
+#include "Dependecies/Animator.h"
 
 namespace Shared
 {

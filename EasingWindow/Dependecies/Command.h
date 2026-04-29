@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "ParseEnum.h"
+#include "../Util/Entry.h"
 
 //----------------------------------------//
 //              ENUMERATIONS              //

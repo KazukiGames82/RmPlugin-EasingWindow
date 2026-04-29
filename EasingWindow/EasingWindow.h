@@ -1,27 +1,14 @@
 ﻿#pragma once
 
-// 240kb
-// 225kb
-// 226kb
-// 223kb
-// 224kb
-// 
-//
-//
-//
-//
-//
-//
-//
 #include <windows.h>
 #include <string>
 #include "../API/RainmeterAPI.h"
 
-#include "Config.h"
-#include "Easing.h"
-#include "Motion.h"
-#include "Direction.h"
-#include "Command.h"
+#include "Dependecies/Config.h"
+#include "Dependecies/Easing.h"
+#include "Dependecies/Motion.h"
+#include "Dependecies/Direction.h"
+#include "Dependecies/Command.h"
 
 namespace Shared
 {
