@@ -1,7 +1,7 @@
-#include "FileWin.h"
 #include <windows.h>
+#include "FileWin.h"
 
-void GetAnchors(LPCWSTR path, LPCWSTR section, std::wstring& anchorX, std::wstring& anchorY) noexcept
+void GetAnchors(const wchar_t* path, const wchar_t*  section, std::wstring& anchorX, std::wstring& anchorY) noexcept
 {
     wchar_t buf[256]{};
 

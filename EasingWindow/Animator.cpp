@@ -1,7 +1,12 @@
+#include <chrono>
+
 #include "Animator.h"
+#include "Math.h"
+#include "Command.h"
+
 #include "../API/RainmeterAPI.h"
 
-void Move(void* skin, PointInt point, PointInt anchor)
+void Move(void* skin, PointInt point, PointInt anchor) noexcept
 {
 	const PointInt pos = point - anchor;
 
@@ -10,7 +15,7 @@ void Move(void* skin, PointInt point, PointInt anchor)
 	RmExecute(skin, buffer);
 }
 
-void Execute(void* rm, void* skin, LPCWSTR action)
+void Execute(void* skin, LPCWSTR action) noexcept
 {
 	if (!action || action[0] == L'\0') return;
 
@@ -51,13 +56,17 @@ void AnimationManager::Shutdown()
 }
 void AnimationManager::Cancel(HWND hwnd)
 {
-	std::lock_guard<std::mutex> lock(mtx);
-
-	for (auto& anim : animations)
 	{
-		if (anim.m_Hwnd == hwnd)
-			anim.aborted = true;
+		std::lock_guard<std::mutex> lock(mtx);
+
+		for (auto& anim : animations)
+		{
+			if (anim.m_Hwnd == hwnd)
+				anim.aborted = true;
+		}
 	}
+
+	cv.notify_one();
 }
 
 void AnimationManager::Add(Animation anim)
@@ -71,7 +80,7 @@ void AnimationManager::Add(Animation anim)
 				a.aborted = true;
 		}
 
-		Execute(anim.m_Rm, anim.m_Skin, anim.action[static_cast<uint8_t>(State::Begin)].c_str());
+		Execute(anim.m_Skin, anim.action[(uint8_t)STATE::BEGIN].c_str());
 
 		anim.ResetRuntime();
 		animations.push_back(std::move(anim));
@@ -100,7 +109,7 @@ void AnimationManager::Loop(std::stop_token st)
 
 	std::vector<std::pair<HWND, BOOL>> mouseActions;
 	std::vector<std::pair<void*, PointInt>> moves;
-	std::vector<std::tuple<void*, void*, std::wstring>> completes;
+	std::vector<std::pair<void*, std::wstring>> completes;
 	std::vector<std::pair<HWND, PointInt>> deferredMoves;
 
 	while (!st.stop_requested())
@@ -147,7 +156,7 @@ void AnimationManager::Loop(std::stop_token st)
 				double e = anim.ease(t);
 
 				PointDouble easePos = ConvertToDouble(anim.start) + (ConvertToDouble(anim.animTarget) - ConvertToDouble(anim.start)) * e;
-				anim.motion(e, t, dt, easePos, anim.coords, anim.velocity, anim.m_Motion);
+				anim.motion(e, t, dt, easePos, anim.coords, anim.velocity, anim.m_MotionParams);
 				PointInt currentPos = { int(std::lround(anim.coords.x)), int(std::lround(anim.coords.y)) };
 
 				if (anim.isDynamic)
@@ -164,37 +173,37 @@ void AnimationManager::Loop(std::stop_token st)
 
 				if (!anim.finished && !anim.aborted)
 				{
-					if (anim.isOnlyBangs)
-					{
-						if (++anim.updates >= anim.bangInterval && anim.bangInterval > 0)
-						{
-							anim.updates = 0;
-							moves.push_back({ anim.m_Skin, currentPos });
-						}
-					}
-					else 
-					{
-						if (++anim.updates >= anim.bangInterval && anim.bangInterval > 0)
-						{
-							anim.updates = 0;
-							moves.push_back({ anim.m_Skin, currentPos });
-						} 
-						else
-						{
+					//if (anim.isOnlyBangs)
+					//{
+					//	if (++anim.updates >= anim.bangInterval && anim.bangInterval > 0)
+					//	{
+					//		anim.updates = 0;
+					//		moves.push_back({ anim.m_Skin, currentPos });
+					//	}
+					//}
+					//else 
+					//{
+					//	if (++anim.updates >= anim.bangInterval && anim.bangInterval > 0)
+					//	{
+					//		anim.updates = 0;
+					//		moves.push_back({ anim.m_Skin, currentPos });
+					//	} 
+					//	else
+					//	{
 							if (currentPos != anim.lastAppliedPos)
 							{
 								anim.lastAppliedPos = currentPos;
 								deferredMoves.emplace_back(anim.m_Hwnd, currentPos);
 							}
-						}				
-					}
+					//	}				
+					//}
 				}
 
 				if (anim.finished)
 				{
 					mouseActions.push_back({ anim.m_Hwnd, TRUE});
 					moves.push_back({ anim.m_Skin, anim.animTarget });
-					completes.push_back({ anim.m_Rm, anim.m_Skin, anim.action[static_cast<uint8_t>(State::Complete)]});
+					completes.push_back({anim.m_Skin, anim.action[(uint8_t)STATE::BEGIN]});
 				}
 			}
 			std::erase_if(animations, [](const Animation& a) { return a.finished || a.aborted; });
@@ -211,7 +220,7 @@ void AnimationManager::Loop(std::stop_token st)
 		
 		if (!deferredMoves.empty())
 		{
-			if (HDWP hdwp = BeginDeferWindowPos(static_cast<int>(deferredMoves.size())))
+			if (HDWP hdwp = BeginDeferWindowPos((int)deferredMoves.size()))
 			{
 				for (auto& [hwnd, pos] : deferredMoves)
 				{
@@ -233,8 +242,8 @@ void AnimationManager::Loop(std::stop_token st)
 
 		if (!completes.empty())
 		{
-			for (auto& [rm, skin, command] : completes)
-				Execute(rm, skin, command.c_str());
+			for (auto& [skin, command] : completes)
+				Execute(skin, command.c_str());
 			completes.clear();
 		}
 
@@ -249,7 +258,7 @@ void Animation::ResetRuntime()
 	aborted = false;
 
 	elapsed = 0.0;
-	updates = 0;
+	//updates = 0;
 
 	coords = ConvertToDouble(start);
 	velocity = {};

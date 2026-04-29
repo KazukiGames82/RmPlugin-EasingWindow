@@ -1,11 +1,32 @@
 ﻿#pragma once
 
+// 240kb
+// 225kb
+// 226kb
+// 223kb
+// 224kb
+// 
+//
+//
+//
+//
+//
+//
+//
+#include <windows.h>
+#include <string>
+#include "../API/RainmeterAPI.h"
+
+#include "Config.h"
+#include "Easing.h"
+#include "Motion.h"
+#include "Direction.h"
+#include "Command.h"
+
 namespace Shared
 {
 	extern bool initialized;
-	extern std::atomic<int> measureCount;
 	extern std::wstring filePath;
-	extern std::wstring skinPath;
 }
 
 //-----------------------------------//
@@ -26,57 +47,75 @@ private:
 	HWND m_Hwnd = nullptr;
 
 	Config m_Config{};
-	Easing m_Easing{};
-	Motion m_Motion{};
-	DirectionHandler m_Direction{};
-	CommandHandler m_Command{};
+	MotionParams m_MotionParams{};
+	EASING m_Easing = EASING::DEFAULT;
+	MOTION m_Motion = MOTION::DEFAULT;	
+	DIRECTION m_Direction = DIRECTION::DEFAULT;
+	COMMAND m_Command = COMMAND::DEFAULT;
+	std::wstring m_Actions[2][2] = { L"" };
 	bool m_StateInit = false;
 	bool m_StartCaptured = false;
 	bool m_ToEnd = true;
 	MOVE_STATE m_State = MOVE_STATE::AT_START;
 
 private:
+	void ReadPoints() noexcept;
+	void ReadConfig() noexcept;
+	void ReadEasing() noexcept;
+	void ReadMotion() noexcept;
+	void ReadDirection() noexcept;
+	void ReadActions() noexcept;
+
 	void Start(bool toEnd);
 	void Stop() const;
 
 	MOVE_STATE DetectState() const;
 
 public:
-	bool updateValues = true;
-
 	Measure(void* rm);
     ~Measure();
-	void GetConfig();
-	void GetPosition();
-	void GetCommand(LPCWSTR args);
 
-public:
-	inline void InvalidValue(LPCWSTR option, LPCWSTR value, bool showError) { if (showError) RmLogF(m_Rm, LOG_ERROR, L"Invalid %s: %s", option, value); }
-	inline LPCWSTR ReadString(LPCWSTR option, LPCWSTR defValue) { return RmReadString(m_Rm, option, defValue); }
-	inline bool ReadBoolean(LPCWSTR option, bool defValue) { return ClampValue(RmReadInt(m_Rm, option, defValue ? 1 : 0), 0, 1) == 1; }
-	template<typename T>
-	T ReadNumber(LPCWSTR option, T defValue);
-	template<typename T>
-	T MinError(LPCWSTR option, T defValue, T minValue);
+	void ReadOptions() noexcept;
+	void ReadCommand(const wchar_t* args) noexcept;
+
+	void GetPosition();
+
 };
 
-template<typename T>
-inline T Measure::ReadNumber(LPCWSTR option, T defValue)
+inline bool ReadBoolean(void* rm, const wchar_t* option, bool defaultValue) noexcept
 {
-	return static_cast<T>(RmReadFormula(m_Rm, option, defValue));
+	const int value = RmReadInt(rm, option, defaultValue ? 1 : 0);
+
+	if (value != 0 && value != 1)
+	{
+		RmLogF(rm, LOG_ERROR, L"%s should be 0 or 1", option);
+		return defaultValue;
+	}
+
+	return value != 0;
 }
 
-template<typename T>
-inline T Measure::MinError(LPCWSTR option, T defValue, T minValue)
+inline float ReadMinFormula(void* rm, const wchar_t* option, float defaultValue, float minValue) noexcept
 {
-	std::wstring upper = option;
-	ConvertToUpperCase(upper);
-	T value = ReadNumber(option, defValue);
+	const float value = (float)RmReadFormula(rm, option, defaultValue);
 
 	if (value < minValue)
 	{
-		RmLogF(m_Rm, LOG_ERROR, L"%s shouldn't be less than %g", upper.c_str(), static_cast<double>(minValue));
-		return minValue;
+		RmLogF(rm, LOG_ERROR, L"Value must not be less than %.2f", minValue);
+		return defaultValue;
+	}
+
+	return value;
+}
+
+inline int ReadNonNegative(void* rm, const wchar_t* option, int defaultValue) noexcept
+{
+	const int value = (int)RmReadFormula(rm, option, defaultValue);
+
+	if (value < 0.0f)
+	{
+		RmLogF(rm, LOG_ERROR, L"%s must not be negative", option);
+		return defaultValue;
 	}
 
 	return value;

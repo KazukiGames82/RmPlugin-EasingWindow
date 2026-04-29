@@ -1,6 +1,6 @@
 #include "WindowWin.h"
 
-PointInt GetStartPosition(HWND hwnd, const Config& config, Direction direction) noexcept
+PointInt GetStartPosition(const HWND hwnd, const Config& config, const DIRECTION direction) noexcept
 {
     RECT rc{};
     GetWindowRect(hwnd, &rc);
@@ -24,35 +24,35 @@ PointInt GetStartPosition(HWND hwnd, const Config& config, Direction direction) 
 
     switch (direction)
     {
-        case Direction::LEFTTOP:
+        case DIRECTION::LEFTTOP:
             out.x = screen.left - width + a.x;
             out.y = screen.top - height + a.y;
             break;
-        case Direction::TOP:
+        case DIRECTION::TOP:
             out.x = config.End().x;
             out.y = screen.top - height + a.y;
             break;
-        case Direction::RIGHTTOP:
+        case DIRECTION::RIGHTTOP:
             out.x = screen.right + a.x;
             out.y = screen.top - height + a.y;
             break;
-        case Direction::LEFT:
+        case DIRECTION::LEFT:
             out.x = screen.left - width + a.x;
             out.y = config.End().y;
             break;
-        case Direction::RIGHT:
+        case DIRECTION::RIGHT:
             out.x = screen.right + a.x;
             out.y = config.End().y;
             break;
-        case Direction::LEFTBOTTOM:
+        case DIRECTION::LEFTBOTTOM:
             out.x = screen.left - width + a.x;
             out.y = screen.bottom + a.y;
             break;
-        case Direction::BOTTOM:
+        case DIRECTION::BOTTOM:
             out.x = config.End().x;
             out.y = screen.bottom + a.y;
             break;
-        case Direction::RIGHTBOTTOM:
+        case DIRECTION::RIGHTBOTTOM:
             out.x = screen.right + a.x;
             out.y = screen.bottom + a.y;
             break;

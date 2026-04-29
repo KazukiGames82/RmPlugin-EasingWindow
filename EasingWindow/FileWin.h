@@ -1,6 +1,5 @@
 #pragma once
 
-#include <windows.h>
 #include <string>
 
-void GetAnchors(LPCWSTR path, LPCWSTR section, std::wstring& anchorX, std::wstring& anchorY) noexcept;
+void GetAnchors(const wchar_t* path, const wchar_t* section, std::wstring& anchorX, std::wstring& anchorY) noexcept;

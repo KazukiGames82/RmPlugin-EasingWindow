@@ -1,46 +1,36 @@
 #pragma once
 
-#include <windows.h>
 #include <cstdint>
+#include "ParseEnum.h"
 
 //----------------------------------------//
 //              ENUMERATIONS              //
 //----------------------------------------//
 
-enum class Direction : uint8_t
+enum class DIRECTION : uint8_t
 {
-    UNKNOWN = 0,
-    SKIN,
-    LEFTTOP,
-    TOP,
-    RIGHTTOP,
+    DEFAULT,
+
     LEFT,
+    TOP,
     RIGHT,
-    LEFTBOTTOM,
     BOTTOM,
+
+    LEFTTOP,
+    RIGHTTOP,
+    LEFTBOTTOM,
     RIGHTBOTTOM
 };
 
-//-----------------------------------//
-//              STRUCTS              //
-//-----------------------------------//
-
-class DirectionHandler
+static constexpr Entry<DIRECTION> DirectionTable[] =
 {
-private:
-    Direction direction = Direction::SKIN;
-
-public:
-    inline bool IsSkin() const noexcept { return direction == Direction::SKIN; }
-    inline Direction Get() const noexcept { return direction; }
-    inline void Set(Direction value) noexcept { direction = value; }
-    inline bool Is(Direction value) const noexcept { return direction == value; }
-    inline void Reset() noexcept { direction = Direction::SKIN; }
+    { L"DEFAULT",      DIRECTION::DEFAULT     },
+    { L"LEFT",         DIRECTION::LEFT        },
+    { L"TOP",          DIRECTION::TOP         },
+    { L"RIGHT",        DIRECTION::RIGHT       },
+    { L"BOTTOM",       DIRECTION::BOTTOM      },
+    { L"LEFTTOP",      DIRECTION::LEFTTOP     },
+    { L"RIGHTTOP",     DIRECTION::RIGHTTOP    },
+    { L"LEFTBOTTOM",   DIRECTION::LEFTBOTTOM  },
+    { L"RIGHTBOTTOM",  DIRECTION::RIGHTBOTTOM }
 };
-
-//-------------------------------//
-//              API              //
-//-------------------------------//
-
-//Direction ParseDirection(const std::wstring& name) noexcept;
-Direction ParseDirection(LPCWSTR name) noexcept;

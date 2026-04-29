@@ -3,15 +3,15 @@
 #include <string>
 #include <algorithm>
 
-inline void ConvertToLowerCase(std::wstring& text) noexcept
-{
-    std::transform(text.begin(), text.end(), text.begin(), towlower);
-}
-
-inline void ConvertToUpperCase(std::wstring& text) noexcept
-{
-    std::transform(text.begin(), text.end(), text.begin(), towupper);
-}
+//inline void ConvertToLowerCase(std::wstring& text) noexcept
+//{
+//    std::transform(text.begin(), text.end(), text.begin(), towlower);
+//}
+//
+//inline void ConvertToUpperCase(std::wstring& text) noexcept
+//{
+//    std::transform(text.begin(), text.end(), text.begin(), towupper);
+//}
 
 inline std::wstring TrimString(const std::wstring& text) noexcept
 {

@@ -25,17 +25,11 @@
     <Filter Include="Dependecies\Easing">
       <UniqueIdentifier>{1441108d-0f18-4749-9493-ec10a4cbbdbf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dependecies\Direction">
-      <UniqueIdentifier>{2a3bd627-67f9-423e-8b46-eb11f3976fb2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dependecies\Config">
-      <UniqueIdentifier>{a301feb7-0145-4255-bebb-2af61034e267}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dependecies\Animator">
       <UniqueIdentifier>{c01f5e9a-c715-434d-9d6b-01c84bc13051}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dependecies\CommandHandler">
-      <UniqueIdentifier>{3c6c1ff8-e2bf-4e18-847e-8738bbcf3384}</UniqueIdentifier>
+    <Filter Include="Helpers\ParseEnum">
+      <UniqueIdentifier>{372a8db5-39e8-4c43-b1a3-853697daa665}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,17 +39,8 @@
     <ClInclude Include="EasingWindow.h">
       <Filter>EasingWindow</Filter>
     </ClInclude>
-    <ClInclude Include="Direction.h">
-      <Filter>Dependecies\Direction</Filter>
-    </ClInclude>
     <ClInclude Include="Motion.h">
       <Filter>Dependecies\Motion</Filter>
-    </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>Dependecies\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandHandler.h">
-      <Filter>Dependecies\CommandHandler</Filter>
     </ClInclude>
     <ClInclude Include="Easing.h">
       <Filter>Dependecies\Easing</Filter>
@@ -78,6 +63,18 @@
     <ClInclude Include="Animator.h">
       <Filter>Dependecies\Animator</Filter>
     </ClInclude>
+    <ClInclude Include="ParseEnum.h">
+      <Filter>Helpers\ParseEnum</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Dependecies</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Dependecies</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Dependecies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EasingWindow.rc">
@@ -91,14 +88,8 @@
     <ClCompile Include="Easing.cpp">
       <Filter>Dependecies\Easing</Filter>
     </ClCompile>
-    <ClCompile Include="Direction.cpp">
-      <Filter>Dependecies\Direction</Filter>
-    </ClCompile>
     <ClCompile Include="Motion.cpp">
       <Filter>Dependecies\Motion</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandHandler.cpp">
-      <Filter>Dependecies\CommandHandler</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Helpers\Core</Filter>

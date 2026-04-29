@@ -3,16 +3,12 @@
 #include <windows.h>
 
 #include <string>
-#include <mutex>
 #include <vector>
-#include <condition_variable>
+#include <mutex>
 #include <thread>
-#include <stop_token>
-#include <chrono>
+#include <condition_variable>
 
 #include "Point.h"
-#include "Math.h"
-#include "CommandHandler.h"
 #include "Easing.h"
 #include "Motion.h"
 
@@ -28,16 +24,17 @@ struct Animation
 	bool completed : 1 = false;
 	bool isDynamic : 1 = false;
 	bool isMouseActions : 1 = true;
-	bool isOnlyBangs : 1 = false;
+	//bool isOnlyBangs : 1 = false;
 
-	Motion m_Motion{};
+	MOTION m_Motion{};
+	MotionParams m_MotionParams{};
 	MotionFn motion = nullptr;
 	EaseFn ease = nullptr;
 
 	double duration = 0.0;
 	double elapsed = 0.0;
-	int updates = 0;
-	uint16_t bangInterval = 0;
+	//int updates = 0;
+	//uint16_t bangInterval = 255;
 
 	PointInt lastAppliedPos{};
 	PointInt start{};
@@ -74,5 +71,5 @@ public:
 	void Cancel(HWND hwnd);
 };
 
-void Move(void* skin, PointInt point, PointInt anchor = { 0,0 });
-void Execute(void* rm, void* skin, LPCWSTR action);
+void Move(void* skin, PointInt point, PointInt anchor = { 0,0 }) noexcept;
+void Execute(void* skin, LPCWSTR action) noexcept;

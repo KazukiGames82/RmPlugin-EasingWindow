@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
-    <ClInclude Include="CommandHandler.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Easing.h" />
@@ -28,6 +28,7 @@
     <ClInclude Include="FileWin.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Motion.h" />
+    <ClInclude Include="ParseEnum.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="StringUtil.h" />
     <ClInclude Include="Version.h" />
@@ -38,8 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
-    <ClCompile Include="CommandHandler.cpp" />
-    <ClCompile Include="Direction.cpp" />
     <ClCompile Include="Easing.cpp" />
     <ClCompile Include="EasingWindow.cpp" />
     <ClCompile Include="FileWin.cpp" />
@@ -169,16 +168,18 @@ xcopy /R /Y "$(OutputPath)$(TargetFileName)" "%appdata%/Rainmeter/Plugins/$(Targ
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;PLUGINEMPTY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -187,6 +188,7 @@ xcopy /R /Y "$(OutputPath)$(TargetFileName)" "%appdata%/Rainmeter/Plugins/$(Targ
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>..\API\x32\Rainmeter.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
       <Command>taskkill /F /IM Rainmeter.exe
@@ -196,16 +198,18 @@ xcopy /R /Y "$(OutputPath)$(TargetFileName)" "%appdata%/Rainmeter/Plugins/$(Targ
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;PLUGINEMPTY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -214,6 +218,7 @@ xcopy /R /Y "$(OutputPath)$(TargetFileName)" "%appdata%/Rainmeter/Plugins/$(Targ
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>..\API\x64\Rainmeter.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <ResourceCompile>
       <PreprocessorDefinitions>_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>

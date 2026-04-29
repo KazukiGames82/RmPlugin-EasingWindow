@@ -258,47 +258,6 @@ static constexpr EaseFn EasingFunctions[] =
     EasingInElastic, EasingOutElastic, EasingInOutElastic
 };
 
-struct EasingEntry
-{
-    LPCWSTR name;
-    EASING value;
-};
-
-static constexpr EasingEntry EasingTable[] =
-{
-    {L"linear",     EASING::LINEAR},
-    {L"insine",     EASING::INSINE},
-    {L"outsine",    EASING::OUTSINE},
-    {L"inoutsine",  EASING::INOUTSINE},
-    {L"inquad",     EASING::INQUAD},
-    {L"outquad",    EASING::OUTQUAD},
-    {L"inoutquad",  EASING::INOUTQUAD},
-    {L"incubic",    EASING::INCUBIC},
-    {L"outcubic",   EASING::OUTCUBIC},
-    {L"inoutcubic", EASING::INOUTCUBIC},
-    {L"inquart",    EASING::INQUART},
-    {L"outquart",   EASING::OUTQUART},
-    {L"inoutquart", EASING::INOUTQUART},
-    {L"inquint",    EASING::INQUINT},
-    {L"outquint",   EASING::OUTQUINT},
-    {L"inoutquint", EASING::INOUTQUINT},
-    {L"inexpo",     EASING::INEXPO},
-    {L"outexpo",    EASING::OUTEXPO},
-    {L"inoutexpo",  EASING::INOUTEXPO},
-    {L"incirc",     EASING::INCIRC},
-    {L"outcirc",    EASING::OUTCIRC},
-    {L"inoutcirc",  EASING::INOUTCIRC},
-    {L"inback",     EASING::INBACK},
-    {L"outback",    EASING::OUTBACK},
-    {L"inoutback",  EASING::INOUTBACK},
-    {L"inbounce",   EASING::INBOUNCE},
-    {L"outbounce",  EASING::OUTBOUNCE},
-    {L"inoutbounce",EASING::INOUTBOUNCE},
-    {L"inelastic",  EASING::INELASTIC},
-    {L"outelastic", EASING::OUTELASTIC},
-    {L"inoutelastic",EASING::INOUTELASTIC},
-};
-
 //-------------------------------//
 //              API              //
 //-------------------------------//
@@ -306,18 +265,4 @@ static constexpr EasingEntry EasingTable[] =
 EaseFn GetEaseFn(EASING easing) noexcept
 {
     return EasingFunctions[static_cast<uint8_t>(easing)];
-}
-
-EASING ParseEasing(LPCWSTR name) noexcept
-{
-    if (!name || !*name)
-        return EASING::UNKNOWN;
-
-    for (const auto& entry : EasingTable)
-    {
-        if (_wcsicmp(entry.name, name) == 0)
-            return entry.value;
-    }
-
-    return EASING::UNKNOWN;
 }

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <windows.h>
+#include <Windows.h>
 #include "Config.h"
 #include "Direction.h"
 
-PointInt GetStartPosition(HWND hwnd, const Config& config, Direction direction) noexcept;
+PointInt GetStartPosition(const HWND hwnd, const Config& config, const DIRECTION direction) noexcept;
